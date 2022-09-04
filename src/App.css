@@ -1,38 +1,40 @@
 .App {
   text-align: center;
+  font-family: "Lato";
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: "Lato";
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+*:focus {
+  outline: none;
+  border: "12px solid #a3adce";
 }
 
-.App-link {
-  color: #61dafb;
+@font-face {
+  font-family: "Lato";
+  font-weight: 700;
+  src: local("Lato"),
+    url(./fonts/lato-v14-latin-700.7fbbfd1610770d594aef.woff2)
+      format("opentype");
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: "Lato";
+  src: local("Lato"),
+    url(./fonts/lato-v14-latin-regular.f1a4a058fbba1e35a406.woff2)
+      format("opentype");
 }
+
+/* input:focus {
+  box-shadow: 0 0 5px #4d61fc !important;
+  outline: none !important;
+} */
