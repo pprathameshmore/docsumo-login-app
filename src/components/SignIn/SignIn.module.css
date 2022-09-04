@@ -8,9 +8,9 @@
 
 .logoContainer {
   position: absolute;
-  top: 8%;
+  top: 7%;
   left: 16%;
-  width: 180px;
+  width: 170px;
 }
 
 .logoContainer img {
@@ -36,7 +36,7 @@
   font-size: 24px;
   font-weight: 700;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 8px;
 }
 
 .signInFormContainer__input {
@@ -58,6 +58,14 @@
   border: 1px solid #a3adce;
   margin-top: 6px;
   padding: 11px 14px;
+  font-size: 16px;
+}
+
+.signInFormContainer__input__input::placeholder {
+  font: normal normal 12px/1.2 Lato;
+  font-size: 14px;
+  font-weight: 400;
+  color: #979797;
 }
 
 .signInFormContainer__input__input:focus {
@@ -87,6 +95,29 @@
   outline: none;
   border: none;
   font: normal normal 16px/1.25 Lato;
+  cursor: pointer;
+}
+
+.signInFormContainer__submit:hover {
+  background-color: #3b4ed1;
+}
+
+.signInFormContainer__submit__disabled {
+  background-color: #7080fd;
+  color: white;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  font: normal normal 16px/1.25 Lato;
+}
+
+.signInFormContainer__submit__disabled span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .signInFormContainer__forgotPassword {
@@ -139,4 +170,34 @@
     top: 8%;
     width: 70%;
   }
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.signInFormContainer__error {
+  display: block;
+  color: #c70011;
+  border: 1px solid #c70011;
+  border-radius: 4px;
+  background: #fff2f2;
+  text-align: left;
+  padding: 7px 12px;
+  font: normal normal 12px/1.16 Lato;
+  margin: 10px 0;
 }

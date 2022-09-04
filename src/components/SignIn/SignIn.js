@@ -8,6 +8,8 @@ export const SignIn = () => {
     password: "",
   });
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const [validationError, setValidationError] = React.useState({
     isEmailValid: true,
     isPasswordValid: true,
@@ -33,12 +35,16 @@ export const SignIn = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setHasError({ ...hasError, error: false });
     if (!user.email || !user.password) {
       setValidationError({
         isEmailValid: user.email ? true : false,
         isPasswordValid: user.password ? true : false,
       });
-      setHasError(false);
+      setHasError({
+        ...hasError,
+        error: false,
+      });
       return;
     } else {
       if (user.email.includes("@")) {
@@ -51,20 +57,25 @@ export const SignIn = () => {
           ...validationError,
           isEmailValid: false,
         });
-        setHasError(false);
+        setHasError({
+          ...hasError,
+          error: false,
+        });
         return;
       }
     }
+    setIsLoading(true);
     signInHandler(user.email, user.password)
       .then((response) => {
-        console.log("resolve", response);
         if (response.status_code === 200) {
-          setHasError(false);
+          setHasError({ error: false, message: "" });
         } else {
           setHasError({ error: true, message: response.error });
         }
+        setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
         setHasError({ error: true, message: error.error });
       });
   };
@@ -80,25 +91,13 @@ export const SignIn = () => {
             Login to your Docsumo account
           </h1>
           {hasError.error ? (
-            <span
-              style={{
-                display: "block",
-                color: "#c70011",
-                border: "1px solid #c70011",
-                borderRadius: "4px",
-                background: "#fff2f2",
-                textAlign: "left",
-                padding: "7px 12px",
-                font: "normal normal 12px/1.16 Lato",
-                margin: "10px 0",
-              }}
-            >
-              User doesn't exist
+            <span className={styles.signInFormContainer__error}>
+              {hasError.message}
             </span>
           ) : (
             <div
               style={{
-                height: "20px",
+                height: "35px",
               }}
             ></div>
           )}
@@ -119,7 +118,7 @@ export const SignIn = () => {
                   }
                   id="email"
                   name="email"
-                  placeholder="john@mail.com"
+                  placeholder="janedoe@abc.com"
                   onChange={emailChangeHandler}
                 />
                 <span
@@ -166,11 +165,25 @@ export const SignIn = () => {
               <div className={styles.signInFormContainer__forgotPassword}>
                 <p>Forgot Password?</p>
               </div>
+              {}
+
               <button
-                className={styles.signInFormContainer__submit}
+                className={
+                  isLoading
+                    ? styles.signInFormContainer__submit__disabled
+                    : styles.signInFormContainer__submit
+                }
                 type="submit"
+                disabled={isLoading}
               >
-                Login
+                {isLoading ? (
+                  <span>
+                    <div className={styles.loader}></div>
+                    Logging in...
+                  </span>
+                ) : (
+                  "Login"
+                )}
               </button>
               <div>
                 <p className={styles.signInFormContainer__signUp}>
