@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { signInHandler } from "../../services";
 import styles from "./SignIn.module.css";
 
 export const SignIn = () => {
+  const navigate = useNavigate();
+
   const [user, setUser] = React.useState({
     email: "",
     password: "",
@@ -69,6 +72,7 @@ export const SignIn = () => {
       .then((response) => {
         if (response.status_code === 200) {
           setHasError({ error: false, message: "" });
+          navigate("/dashboard", { state: { user: response.data } });
         } else {
           setHasError({ error: true, message: response.error });
         }
