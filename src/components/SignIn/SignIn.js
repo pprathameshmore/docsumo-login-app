@@ -26,6 +26,10 @@ export const SignIn = () => {
   const emailChangeHandler = (e) => {
     setUser({ ...user, email: e.target.value });
     setValidationError({ ...validationError, isEmailValid: true });
+    setHasError({
+      hasError: false,
+      message: "",
+    });
   };
 
   const passwordChangeHandler = (e) => {
@@ -33,6 +37,10 @@ export const SignIn = () => {
     setValidationError({
       ...validationError,
       isPasswordValid: true,
+    });
+    setHasError({
+      hasError: false,
+      message: "",
     });
   };
 

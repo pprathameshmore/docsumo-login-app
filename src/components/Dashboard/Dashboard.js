@@ -12,7 +12,7 @@ export const Dashboard = () => {
         padding: "1rem",
       }}
     >
-      {user.full_name}
+      Hello {user.full_name}
     </div>
   );
 };
