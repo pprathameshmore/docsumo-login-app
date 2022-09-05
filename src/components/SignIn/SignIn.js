@@ -41,7 +41,7 @@ export const SignIn = () => {
     setHasError({ ...hasError, error: false });
     if (!user.email || !user.password) {
       setValidationError({
-        isEmailValid: user.email ? true : false,
+        isEmailValid: user.email && user.email.includes("@") ? true : false,
         isPasswordValid: user.password ? true : false,
       });
       setHasError({
@@ -69,12 +69,12 @@ export const SignIn = () => {
     }
     setIsLoading(true);
     signInHandler(user.email, user.password)
-      .then((response) => {
-        if (response.status_code === 200) {
+      .then(({ status_code, data, error }) => {
+        if (status_code === 200) {
           setHasError({ error: false, message: "" });
-          navigate("/dashboard", { state: { user: response.data } });
+          navigate("/dashboard", { state: { user: data } });
         } else {
-          setHasError({ error: true, message: response.error });
+          setHasError({ error: true, message: error });
         }
         setIsLoading(false);
       })
